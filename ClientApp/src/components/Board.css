@@ -1,13 +1,18 @@
-.container {
-}
-
 .board {
   display: grid;
+  width: 690px;
+  height: 700px;
   grid-template-columns: 228px 228px 228px;
   grid-template-rows: 232px 232px 232px;
-  border: solid red;
+  border: solid black;
   background-image: url("../assets/img2/board.png");
   background-size: 100% 100%;
+  background-repeat: no-repeat;
+  grid-gap: 0;
+}
+
+.boardItem {
+  border: 1px solid black;
 }
 
 

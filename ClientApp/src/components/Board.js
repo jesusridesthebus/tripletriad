@@ -5,7 +5,15 @@ export default function Board() {
     return(
       <div>
         <div className='board'>
-        board poo
+        <div className='boardItem'></div>
+        <div className='boardItem'></div>
+        <div className='boardItem'></div>
+        <div className='boardItem'></div>
+        <div className='boardItem'></div>
+        <div className='boardItem'></div>
+        <div className='boardItem'></div>
+        <div className='boardItem'></div>
+        <div className='boardItem'></div>
         </div>
       </div>
     );
