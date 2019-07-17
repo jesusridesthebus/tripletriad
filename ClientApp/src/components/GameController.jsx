@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Header from './Header';
 import Board from './Board';
+import Hand from './Hand';
+import Footer from './Footer';
 
 export class GameController extends React.Component {
 
@@ -12,9 +14,11 @@ export class GameController extends React.Component {
   }
   render(){
     return(
-      <div>
-        <h1>hey</h1>
-        <Board />
+      <div className="page">fartfartfart
+        <div className="playerSection pageItem"><Hand /></div>
+        <div className="header pageItem"><Header /></div>
+        <div className="boardComp pageItem"><Board /></div>
+        <div className="footer pageItem"><Footer /></div>
       </div>
     );
   }

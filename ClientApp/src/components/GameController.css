@@ -1,0 +1,29 @@
+.page {
+  display: grid;
+  height: 100%;
+  width: 100%;
+  grid-template-columns: 200px 200px 200px;
+  grid-template-rows: 200px 200px 200px;
+  border: solid blue;
+  background-color: yellow;
+}
+
+.playerSection {
+  border: solid red;
+  grid-column-start: 1;
+  grid-column-end: 1;
+  grid-row-start: 1;
+  grid-row-end: 1;
+}
+
+.boardComp{
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 2;
+  grid-row-end: 3;
+
+}
+
+.pageItem {
+  border: 2px solid green;
+}

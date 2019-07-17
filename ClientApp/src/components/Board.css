@@ -2,8 +2,8 @@
   display: grid;
   width: 690px;
   height: 700px;
-  grid-template-columns: 228px 228px 228px;
-  grid-template-rows: 232px 232px 232px;
+  grid-template-columns: 231px 231px 231px;
+  grid-template-rows: 234px 234px 234px;
   border: solid black;
   background-image: url("../assets/img2/board.png");
   background-size: 100% 100%;
