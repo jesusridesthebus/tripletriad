@@ -7,20 +7,28 @@ namespace my_new_app.Context
 
 	public class DataContext : DbContext
 	{
-		public DbSet<Stuff> Stuff { get; set; }	
+		public DbSet<Card> Card { get; set; }
 
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		{
-			optionsBuilder.UseMySQL("server=localhost;database=overreaction;user=root;password=root;port=8889;");
-		}		
+			optionsBuilder.UseMySQL("server=localhost;database=tripleTriad;user=root;password=root;port=8889;");
+		}
 	}
 
-	public class Stuff
+	public class Card
 	{
+		public int Top { get; set; }
+		public int Bottom { get; set; }
+		public int Left { get; set; }
+		public int Right { get; set; }
 		public int Id { get; set; }
-		public int Day { get; set; }
-		public int Season { get; set; }
-		public int Year { get; set; }		
+		public string CardOwner { get; set; }
+		public string Image { get; set; }
 	}
+
+// public class Game
+// {
+// 	public List<Card> Deck { get; set; } = new List<Card>();
+// }
 
 }

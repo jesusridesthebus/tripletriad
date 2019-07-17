@@ -1,0 +1,18 @@
+.container {
+}
+
+.board {
+  display: grid;
+  grid-template-columns: 228px 228px 228px;
+  grid-template-rows: 232px 232px 232px;
+  border: solid red;
+  background-image: url("../assets/img2/board.png");
+  background-size: 100% 100%;
+}
+
+
+
+/* grid-column-start: 2;
+grid-column-end: 3;
+grid-row-start: 2;
+grid-row-end: 3; */

@@ -10,11 +10,12 @@ export class FetchData extends Component {
     fetch('api/SampleData/WeatherForecasts')
       .then(response => response.json())
       .then(data => {
+        console.log(data);
         this.setState({ forecasts: data, loading: false });
       });
   }
 
-  static renderForecastsTable (forecasts) {
+  static renderForecastsTable (cards) {
     return (
       <table className='table table-striped'>
         <thead>
@@ -26,12 +27,12 @@ export class FetchData extends Component {
           </tr>
         </thead>
         <tbody>
-          {forecasts.map(forecast =>
-            <tr key={forecast.dateFormatted}>
-              <td>{forecast.dateFormatted}</td>
-              <td>{forecast.temperatureC}</td>
-              <td>{forecast.temperatureF}</td>
-              <td>{forecast.summary}</td>
+          {cards.map(card =>
+            <tr key={card.top}>
+              <td>{card.top}</td>
+              <td>{card.bottom}</td>
+              <td>{card.right}</td>
+              <td>{card.left}</td>
             </tr>
           )}
         </tbody>
