@@ -3,6 +3,7 @@ import Header from './Header';
 import Board from './Board';
 import Hand from './Hand';
 import Footer from './Footer';
+import { AsyncComponent } from 'react-async-component'
 
 export class GameController extends React.Component {
 
@@ -50,6 +51,7 @@ export class GameController extends React.Component {
   }
   render(){
     let playerTurn = this.state.game.turn % 2;
+    if(this.state.deck.length > 0){
     return(
       <div className="page">
         <div className="playerSection pageItem"><Hand player={this.state.game.players[playerTurn]} /></div>
@@ -58,5 +60,10 @@ export class GameController extends React.Component {
         <div className="footer pageItem"><Footer /></div>
       </div>
     );
+    }else{
+      return(
+        <div> loading..</div>
+      )
+    }
   }
 }
