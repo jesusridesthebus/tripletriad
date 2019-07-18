@@ -6,14 +6,12 @@ import {ImagesRed, ImagesBlue} from './Images';
 // import testImg from './../assets/img/id/_b.png';
 import PropTypes from 'prop-types';
 export default function Hand(props) {
-  setTimeout( () => {let hold = props.player[0].id}, 3000);
+  console.log(props.player);
   return(
-    
     <div className="hand">
-      {/* {props.player.map(p => {
-        {card.push (require('./../assets/img/'+p.id+'/_'+p.owner+'.png'))}
-      })} */}
-      {/* <img src={require('./../assets/img/'+hold+'_r.png')} /> */}
+    {props.player.map((hand,index) => 
+      <img src={require(`./../assets/img/${hand.id}_${hand.owner}.png`)} />
+    )}
     </div>
   );
 }

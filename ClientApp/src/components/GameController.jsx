@@ -3,7 +3,9 @@ import Header from './Header';
 import Board from './Board';
 import Hand from './Hand';
 import Footer from './Footer';
-import { AsyncComponent } from 'react-async-component'
+import { AsyncComponentProvider, createAsyncContext } from 'react-async-component';
+import asyncBootstrapper from 'react-async-bootstrapper';
+import Home from './Home';
 
 export class GameController extends React.Component {
 
@@ -14,7 +16,7 @@ export class GameController extends React.Component {
       .then(response => response.json())
       .then(data => {
         console.log(data);
-        this.setState({ forecasts: data, loading: false });
+        this.setState({ forecasts: data});
         this.state.deck = this.shuffle(data.slice());
         for(let i = 0; i < 10; i++){
           this.state.game.players[i%2].push(this.state.deck[i]);
@@ -23,12 +25,19 @@ export class GameController extends React.Component {
           this.state.game.players[0][i].owner = 'b';
           this.state.game.players[1][i].owner = 'r';
         }
+        
         console.log(this.state.deck);
         console.log(this.state.game);
-       
+        // this.state.loading = false;
+        this.setState({loading: false});
+        this.setState({game: this.state.game});
+        this.render();
+        
+       console.log("hey")
       });
 
     this.state = {
+      loading: true,
       deck: [],
       game: {
         players: [[],[]],
@@ -49,21 +58,67 @@ export class GameController extends React.Component {
     }
     return deck;
   }
-  render(){
-    let playerTurn = this.state.game.turn % 2;
-    if(this.state.deck.length > 0){
-    return(
-      <div className="page">
-        <div className="playerSection pageItem"><Hand player={this.state.game.players[playerTurn]} /></div>
-        <div className="header pageItem"><Header /></div>
-        <div className="boardComp pageItem"><Board /></div>
-        <div className="footer pageItem"><Footer /></div>
-      </div>
-    );
-    }else{
-      return(
-        <div> loading..</div>
-      )
+  // const asyncContext = createAsyncContext()
+  // const app = (<AsyncComponentProvider asyncContext ={asyncContext}></AsyncComponentProvider>
+    
+  // )
+
+  // asyncBootstrapper(app).then(() =>
+  // {
+  //   const appString = renderToString(app)
+ 
+  //     // Get the async component state. 👇
+  //     const asyncState = asyncContext.getState()
+ 
+  //     const html = `
+  //       <html>
+  //         <head>
+  //           <title>Example</title>
+  //         </head>
+  //         <body>
+  //           <div id="app">${appString}</div>
+  //           <script type="text/javascript">
+  //             // Serialise the state into the HTML response 👇
+  //             window.ASYNC_COMPONENTS_STATE = ${serialize(asyncState)}
+  //           </script>
+  //         </body>
+  //       </html>`
+ 
+  //     res.send(html)
+  //   })
+    componentWillMount() {
+      setTimeout(() => {
+        let playerTurn = this.state.game.turn % 2;
+        return <Hand player={this.state.game.players[playerTurn]} />
+      }, 5000);
+      
     }
+  render(){
+    console.log(window.location.href.split('/'))
+    if(this.state.loading === true){
+      console.log("hey");
+      return(
+        <div>Loading..</div>
+        
+      )
+    }else{
+
+      let playerTurn = this.state.game.turn % 2;
+      return(
+        <div className="page">
+          <div className="playerSection pageItem"><Hand player={this.state.game.players[playerTurn]} />
+          </div>
+          <div className="header pageItem"><Header /></div>
+          <div className="boardComp pageItem"><Board /></div>
+          <div className="footer pageItem"><Footer /></div>
+        </div>
+      );
+    }
+
+    // setTimeout(() => {
+      
+      
+    // }, 5000);
+
   }
 }
