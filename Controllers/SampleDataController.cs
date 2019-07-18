@@ -19,7 +19,7 @@ namespace my_new_app.Controllers
         };
 
         [HttpGet("[action]")]
-        public IEnumerable<Card> WeatherForecasts()
+        public IEnumerable<Card> Cards()
         {
             using (var db = new DataContext())
 			{

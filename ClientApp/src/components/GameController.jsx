@@ -9,19 +9,28 @@ export class GameController extends React.Component {
   constructor(props) {
     super(props);
 
-    fetch('api/SampleData/WeatherForecasts')
+    fetch('api/SampleData/Cards')
       .then(response => response.json())
       .then(data => {
         console.log(data);
         this.setState({ forecasts: data, loading: false });
         this.state.deck = this.shuffle(data.slice());
+        for(let i = 0; i < 10; i++){
+          this.state.game.players[i%2].push(this.state.deck[i]);
+        }
+        for(let i = 0; i < 5; i++){
+          this.state.game.players[0][i].owner = 'b';
+          this.state.game.players[1][i].owner = 'r';
+        }
         console.log(this.state.deck);
+        console.log(this.state.game);
+       
       });
 
     this.state = {
       deck: [],
       game: {
-        players: [[]],
+        players: [[],[]],
         turn: 0,
         board: [0,1,2,3,4,5,6,7,8]
         }
