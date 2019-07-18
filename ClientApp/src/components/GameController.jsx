@@ -52,7 +52,7 @@ export class GameController extends React.Component {
     let playerTurn = this.state.game.turn % 2;
     return(
       <div className="page">
-        <div className="playerSection pageItem"><Hand /></div>
+        <div className="playerSection pageItem"><Hand player={this.state.game.players[playerTurn]} /></div>
         <div className="header pageItem"><Header /></div>
         <div className="boardComp pageItem"><Board /></div>
         <div className="footer pageItem"><Footer /></div>
