@@ -1,9 +1,10 @@
 .hand {
   display: grid;
-  width: 200px;
-  height: 600px;
+  width: 20vh;
+  height:90vh;
   grid-template-columns: 200px;
   grid-template-rows: 200px 200px 200px 200px;
-  border: solid red;
   grid-gap: 0;
+  /* justify-content: center;
+  align-items: center; */
 }

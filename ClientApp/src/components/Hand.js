@@ -9,7 +9,7 @@ export default function Hand(props) {
   console.log(props.player);
   return(
     <div className="hand">
-    {props.player.map((hand,index) => 
+    {props.player.map((hand) => 
       <img src={require(`./../assets/img/${hand.id}_${hand.owner}.png`)} />
     )}
     </div>

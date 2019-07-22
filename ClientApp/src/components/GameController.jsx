@@ -6,6 +6,7 @@ import Footer from './Footer';
 import { AsyncComponentProvider, createAsyncContext } from 'react-async-component';
 import asyncBootstrapper from 'react-async-bootstrapper';
 import Home from './Home';
+import './GameController.css';
 
 export class GameController extends React.Component {
 
@@ -108,9 +109,12 @@ export class GameController extends React.Component {
         <div className="page">
           <div className="playerSection pageItem"><Hand player={this.state.game.players[playerTurn]} />
           </div>
-          <div className="header pageItem"><Header /></div>
-          <div className="boardComp pageItem"><Board /></div>
-          <div className="footer pageItem"><Footer /></div>
+          <div className="boardContainer">
+            <div className="header pageItem"><Header /></div>
+            <div className="boardComp pageItem"><Board /></div>
+            <div className="footer pageItem"><Footer /></div>
+          </div>
+          <div className="playerSection2 pageItem"><Hand player={this.state.game.players[playerTurn + 1]} /></div>
         </div>
       );
     }
