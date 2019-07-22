@@ -20,17 +20,16 @@
   text-align: center;
 }
 
-.playerSection {
+/* .playerSection {
   border: solid red;
   display: flex;
   width: 20vh;
   height: 90vh;
-  left: 0;
 }
 
 .playerSection2 {
 
-}
+} */
 
 .boardComp{
   align: center;

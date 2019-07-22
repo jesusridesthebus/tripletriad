@@ -114,7 +114,7 @@ export class GameController extends React.Component {
             <div className="boardComp pageItem"><Board /></div>
             <div className="footer pageItem"><Footer /></div>
           </div>
-          <div className="playerSection2 pageItem"><Hand player={this.state.game.players[playerTurn + 1]} /></div>
+          <div className="playerSection pageItem"><Hand player={this.state.game.players[playerTurn + 1]} /></div>
         </div>
       );
     }
