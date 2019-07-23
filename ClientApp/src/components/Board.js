@@ -10,19 +10,28 @@ export default function Board(props) {
 
   return(
     <div className='board'>
-      <div onDragOver={() => dropCard(0)} className='boardItem a0'></div>
-      <div onDragOver={() => dropCard(1)} className='boardItem a1'></div>
+
+      {props.boardArray.map((square, index) => {
+      if(isNaN(square) === true){
+        return <div onDragOver={() => dropCard(index)} className={`boardItem a${index}`}><img src={require(`./../assets/img/${square.id}_${square.owner}.png`)} /></div>
+      }else{
+       return <div onDragOver={() => dropCard(index)} className={`boardItem a${index}`}></div>
+          }   
+      }
+      )}
+      {/* <div onDragOver={() => dropCard(1)} className='boardItem a1'></div>
       <div onDragOver={() => dropCard(2)} className='boardItem a2'></div>
       <div onDragOver={() => dropCard(3)} className='boardItem a3'></div>
       <div onDragOver={() => dropCard(4)} className='boardItem a4'></div>
       <div onDragOver={() => dropCard(5)} className='boardItem a5'></div>
       <div onDragOver={() => dropCard(6)} className='boardItem a6'></div>
       <div onDragOver={() => dropCard(7)} className='boardItem a7'></div>
-      <div onDragOver={() => dropCard(8)} className='boardItem a8'></div>
+      <div onDragOver={() => dropCard(8)} className='boardItem a8'></div> */}
     </div>
   );
 }
 
 Board.propTypes = {
-  dropCard: PropTypes.func
+  dropCard: PropTypes.func,
+  boardArray: PropTypes.array
 }

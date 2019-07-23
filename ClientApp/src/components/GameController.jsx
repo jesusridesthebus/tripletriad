@@ -43,10 +43,16 @@ export class GameController extends React.Component {
       game: {
         players: [[],[]],
         turn: 0,
-        board: [0,1,2,3,4,5,6,7,8]
+        board: [0,1,2,3,4,5,6,7,8],
+        selectedCard: null,
+        boardLocation: null
         }
       }  
+    this.selectCard = this.selectCard.bind(this);
+    this.handleDeselectCard = this.handleDeselectCard.bind(this);
+    this.handleDropCard = this.handleDropCard.bind(this);
   }
+
   shuffle(deck) {
     var i = 0;
     var j = 0;
@@ -59,6 +65,33 @@ export class GameController extends React.Component {
     }
     return deck;
   }
+
+  selectCard(cardId) {
+    this.state.game.selectedCard = cardId;
+    this.setState({selectedState: cardId});
+  }
+
+  handleDeselectCard() {
+    if(this.state.game.selectedCard !== null && this.state.game.boardLocation !== null && isNaN(this.state.game.board[this.state.game.boardLocation]) === false) {
+      this.setState({boardLocation: null});
+      this.state.game.board[this.state.game.boardLocation] = this.state.game.players[this.state.game.turn % 2].filter((el)=>this.state.game.selectedCard === el.id)[0];
+      console.log(this.state.game)
+      this.state.game.players[this.state.game.turn % 2] = this.state.game.players[this.state.game.turn % 2].filter((el)=>this.state.game.selectedCard !== el.id)
+      this.state.game.boardLocation = null;
+      this.state.game.selectedCard = null;
+       setTimeout(()=>this.state.game.turn++,5);
+      // this.setState({game: this.state.game.turn+1});
+    }
+  }
+
+  handleDropCard(location) {
+    let newState = {
+      boardLocation: location
+    }
+    this.state.game.boardLocation = location;
+    this.setState(newState);
+  }
+
   // const asyncContext = createAsyncContext()
   // const app = (<AsyncComponentProvider asyncContext ={asyncContext}></AsyncComponentProvider>
     
@@ -91,7 +124,7 @@ export class GameController extends React.Component {
       setTimeout(() => {
         let playerTurn = this.state.game.turn % 2;
         return <Hand player={this.state.game.players[playerTurn]} />
-      }, 5000);
+      }, 5);
       
     }
   render(){
@@ -107,14 +140,14 @@ export class GameController extends React.Component {
       let playerTurn = this.state.game.turn % 2;
       return(
         <div className="page">
-          <div className="playerSection pageItem"><Hand player={this.state.game.players[playerTurn]} />
+          <div className="playerSection pageItem"><Hand player={this.state.game.players[0]} selectCard = {this.selectCard} deselectCard={this.handleDeselectCard}/>
           </div>
           <div className="boardContainer">
             <div className="header pageItem"><Header /></div>
-            <div className="boardComp pageItem"><Board /></div>
+            <div className="boardComp pageItem"><Board dropCard={this.handleDropCard} boardArray={this.state.game.board} /></div>
             <div className="footer pageItem"><Footer /></div>
           </div>
-          <div className="playerSection pageItem"><Hand player={this.state.game.players[playerTurn + 1]} /></div>
+          <div className="playerSection pageItem"><Hand player={this.state.game.players[1]} selectCard = {this.selectCard} deselectCard={this.handleDeselectCard}/></div>
         </div>
       );
     }

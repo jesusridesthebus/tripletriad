@@ -6,16 +6,29 @@ import {ImagesRed, ImagesBlue} from './Images';
 // import testImg from './../assets/img/id/_b.png';
 import PropTypes from 'prop-types';
 export default function Hand(props) {
+
+  function selectCard(id) {
+    props.selectCard(id)
+  }
+
+  function deselectCard() {
+    props.deselectCard();
+  }
+
   console.log(props.player);
   return(
     <div className="hand">
     {props.player.map((hand) => 
-      <img src={require(`./../assets/img/${hand.id}_${hand.owner}.png`)} />
+      <div className="cardHolder">   
+      <img  onDragStart={() => selectCard(hand.id)} onDragEnd={() => deselectCard()} className= {`card ${hand.id}`} draggable='true' src={require(`./../assets/img/${hand.id}_${hand.owner}.png`)} />
+      </div>
     )}
     </div>
   );
 }
 
 Hand.propTypes = {
-  player: PropTypes.array
+  player: PropTypes.array,
+  selectCard: PropTypes.func,
+  deselectCard: PropTypes.func
 }

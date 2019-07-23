@@ -9,7 +9,15 @@
   align-items: center; */
 }
 
-.hand img {
-  margin: 0 auto;
-  clear: both;
+/* .card {
+  width: 231px;
+  height: 234px;
+} */
+
+.cardHolder {
+  display: inline-block;
+  width: 216px;
+  height: 222px;
+  margin: 20px 0px 20px 0px;
+  padding: 5px;
 }
