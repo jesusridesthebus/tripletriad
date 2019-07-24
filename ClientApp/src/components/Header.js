@@ -8,9 +8,10 @@ export default function Header(props) {
   function setNull() {
     props.setNull();
   }
+
     return(
       <div>
-        <h1 onDragOver={() => setNull()}>Triple Triad</h1>
+        <h1 className='margin15 headerTitle' onDragOver={() => setNull()}>TRIPLE TRIAD</h1>
       </div>
     );
 }

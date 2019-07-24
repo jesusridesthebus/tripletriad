@@ -13,7 +13,7 @@ export default function Board(props) {
 
       {props.boardArray.map((square, index) => {
       if(isNaN(square) === true){
-        return <div onDragOver={() => dropCard(index)} className={`boardItem a${index}`}><img src={require(`./../assets/img/${square.id}_${square.owner}.png`)} /></div>
+        return <div onDragOver={() => dropCard(index)} className={`boardItem a${index}`}><img className='imgCard' src={require(`./../assets/img/${square.id}_${square.owner}.png`)} /></div>
       }else{
        return <div onDragOver={() => dropCard(index)} className={`boardItem a${index}`}>{index}</div>
           }   

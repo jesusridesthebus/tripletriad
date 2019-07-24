@@ -9,7 +9,7 @@ export default function Footer(props) {
 
   return(
     <div>
-      <h1 onDragOver={() => setNull()}>Footer</h1>
+      <h1 className='margin15' onDragOver={() => setNull()}></h1>
     </div>
   );
 }

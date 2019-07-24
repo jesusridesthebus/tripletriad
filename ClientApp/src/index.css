@@ -1,5 +1,8 @@
-/* html, body {
-    width: 100vh;
-    height: 100vh;
-    margin: 0 auto;
-  } */
+html, body {
+    background: url('./assets/img2/background-pic.jpg') no-repeat center center fixed; 
+    background-size: cover;
+  }
+  @font-face {
+    font-family: final-fantasy-font;
+    src: url('./assets/opensans-light-webfont.ttf') format('truetype'),;
+  }

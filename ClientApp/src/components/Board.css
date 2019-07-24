@@ -16,6 +16,20 @@
 }
 
 
+.imgCard {
+  width: 231px;
+  height: 234px;
+}
+
+.margin15 {
+  margin: 15%;
+}
+
+.headerTitle {
+  font-family: final-fantasy-font;
+  font-size: 55px;
+  color: black;
+}
 
 /* grid-column-start: 2;
 grid-column-end: 3;
