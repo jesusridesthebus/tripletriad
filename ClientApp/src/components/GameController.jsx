@@ -48,15 +48,15 @@ export class GameController extends React.Component {
         boardLocation: null
         },
         neighbors: {
-          0: {right: 1, down: 3},
-          1: {left: 0, right: 2, down: 4},
-          2: {left: 1, down: 5},
-          3: {up: 0, right: 4, down: 6},
-          4: {up: 1, down: 7, left: 3, right: 5},
-          5: {left: 4, up: 2, down: 8},
-          6: {up: 3, right: 7},
-          7: {left: 6, up: 4, right: 8},
-          8: {up: 5, left: 7}
+          0: {right: 1, bottom: 3},
+          1: {left: 0, right: 2, bottom: 4},
+          2: {left: 1, bottom: 5},
+          3: {top: 0, right: 4, bottom: 6},
+          4: {top: 1, bottom: 7, left: 3, right: 5},
+          5: {left: 4, top: 2, bottom: 8},
+          6: {top: 3, right: 7},
+          7: {left: 6, top: 4, right: 8},
+          8: {top: 5, left: 7}
         }
       }  
     this.selectCard = this.selectCard.bind(this);
@@ -102,9 +102,9 @@ export class GameController extends React.Component {
   checkFlip(loc){
     let dict = {
       left: "right",
-      up: "down",
+      top: "bottom",
       right: "left",
-      down: "up"
+      bottom: "top"
     }
     let directions = Object.keys(this.state.neighbors[loc]);
     console.log(directions);
@@ -113,7 +113,13 @@ export class GameController extends React.Component {
       console.log(this.state.game.board[this.state.neighbors[loc][el]]);
 
       if(isNaN(this.state.game.board[this.state.neighbors[loc][el]]) === true ){
-        console.log("neighborino!");
+
+        let neighborino = this.state.game.board[this.state.neighbors[loc][el]];
+        console.log(neighborino[dict[el]]);
+        if(this.state.game.board[loc][el] > neighborino[dict[el]]){
+          neighborino.owner = this.state.game.board[loc].owner;
+          console.log(this.state);
+        }
       }
     })
 
