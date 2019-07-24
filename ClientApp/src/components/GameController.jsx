@@ -48,15 +48,15 @@ export class GameController extends React.Component {
         boardLocation: null
         },
         neighbors: {
-          0: [1,3],
-          1: [0,2,4],
-          2: [1,5],
-          3: [0,4,6],
-          4: [1,4,5,7],
-          5: [4,2,8],
-          6: [3, 7],
-          7: [6, 4, 8],
-          8: [5, 7]
+          0: {right: 1, down: 3},
+          1: {left: 0, right: 2, down: 4},
+          2: {left: 1, down: 5},
+          3: {up: 0, right: 4, down: 6},
+          4: {up: 1, down: 7, left: 3, right: 5},
+          5: {left: 4, up: 2, down: 8},
+          6: {up: 3, right: 7},
+          7: {left: 6, up: 4, right: 8},
+          8: {up: 5, left: 7}
         }
       }  
     this.selectCard = this.selectCard.bind(this);
@@ -87,13 +87,33 @@ export class GameController extends React.Component {
     if(this.state.game.selectedCard !== null && this.state.game.boardLocation !== null && isNaN(this.state.game.board[this.state.game.boardLocation]) === false) {
       this.setState({boardLocation: null});
       this.state.game.board[this.state.game.boardLocation] = this.state.game.players[this.state.game.turn % 2].filter((el)=>this.state.game.selectedCard === el.id)[0];
-      console.log(this.state.game)
       this.state.game.players[this.state.game.turn % 2] = this.state.game.players[this.state.game.turn % 2].filter((el)=>this.state.game.selectedCard !== el.id)
+      this.checkFlip(this.state.game.boardLocation);
       this.state.game.boardLocation = null;
       this.state.game.selectedCard = null;
       this.state.game.turn++
       // this.setState({game: this.state.game.turn+1});
     }
+  }
+
+  checkFlip(loc){
+    let dict = {
+      left: "right",
+      up: "down",
+      right: "left",
+      down: "up"
+    }
+    let directions = Object.keys(this.state.neighbors[loc]);
+    console.log(directions);
+    directions.forEach((el)=>{
+
+      console.log(this.state.game.board[this.state.neighbors[loc][el]]);
+
+      if(isNaN(this.state.game.board[this.state.neighbors[loc][el]]) === true ){
+        console.log("neighbor!");
+      }
+    })
+
   }
 
   handleDropCard(location) {
@@ -155,16 +175,18 @@ export class GameController extends React.Component {
     }else{
 
       let playerTurn = this.state.game.turn % 2;
+
+
       return(
         <div className="page">
-          <div className="playerSection pageItem"><Hand player={this.state.game.players[0]} selectCard = {this.selectCard} deselectCard={this.handleDeselectCard}/>
+          <div className="playerSection pageItem"><Hand player={this.state.game.players[0]} turn = {this.state.game.turn} selectCard = {this.selectCard} deselectCard={this.handleDeselectCard}/>
           </div>
           <div className="boardContainer">
             <div className="header pageItem"><Header setNull = {this.handleSetNull}/></div>
             <div className="boardComp pageItem"><Board dropCard={this.handleDropCard} boardArray={this.state.game.board} /></div>
             <div className="footer pageItem"><Footer setNull = {this.handleSetNull}/></div>
           </div>
-          <div className="playerSection pageItem"><Hand player={this.state.game.players[1]} selectCard = {this.selectCard} deselectCard={this.handleDeselectCard}/></div>
+          <div className="playerSection pageItem"><Hand player={this.state.game.players[1]} turn = {this.state.game.turn + 1} selectCard = {this.selectCard} deselectCard={this.handleDeselectCard}/></div>
         </div>
       );
     }
