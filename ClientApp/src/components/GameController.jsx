@@ -91,6 +91,9 @@ export class GameController extends React.Component {
       this.checkFlip(this.state.game.boardLocation);
       this.state.game.boardLocation = null;
       this.state.game.selectedCard = null;
+      if(this.state.game.turn === 8) {
+        this.checkForWinner();
+      }
       this.state.game.turn++
       // this.setState({game: this.state.game.turn+1});
     }
@@ -110,10 +113,30 @@ export class GameController extends React.Component {
       console.log(this.state.game.board[this.state.neighbors[loc][el]]);
 
       if(isNaN(this.state.game.board[this.state.neighbors[loc][el]]) === true ){
-        console.log("neighbor!");
+        console.log("neighborino!");
       }
     })
 
+  }
+
+  checkForWinner() {
+    // if(this.state.game.players[0])
+    console.log(this.state.game.turn + 'wins')
+    console.log(this.state.game.players[1]);
+    let points = 0;
+    this.state.game.board.forEach((card) => {
+      if (card.owner == 'b') {
+        points +=1;
+      }
+    });
+    points += this.state.game.players[0].length;
+    if(points > 5) {
+      console.log('player 1 wins');
+    } else if( points === 5) {
+      console.log('tie');
+    } else {
+      console.log('player 2 wins');
+    }
   }
 
   handleDropCard(location) {
