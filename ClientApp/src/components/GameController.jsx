@@ -46,11 +46,23 @@ export class GameController extends React.Component {
         board: [0,1,2,3,4,5,6,7,8],
         selectedCard: null,
         boardLocation: null
+        },
+        neighbors: {
+          0: [1,3],
+          1: [0,2,4],
+          2: [1,5],
+          3: [0,4,6],
+          4: [1,4,5,7],
+          5: [4,2,8],
+          6: [3, 7],
+          7: [6, 4, 8],
+          8: [5, 7]
         }
       }  
     this.selectCard = this.selectCard.bind(this);
     this.handleDeselectCard = this.handleDeselectCard.bind(this);
     this.handleDropCard = this.handleDropCard.bind(this);
+    this.handleSetNull = this.handleSetNull.bind(this);
   }
 
   shuffle(deck) {
@@ -79,7 +91,7 @@ export class GameController extends React.Component {
       this.state.game.players[this.state.game.turn % 2] = this.state.game.players[this.state.game.turn % 2].filter((el)=>this.state.game.selectedCard !== el.id)
       this.state.game.boardLocation = null;
       this.state.game.selectedCard = null;
-       setTimeout(()=>this.state.game.turn++,5);
+      this.state.game.turn++
       // this.setState({game: this.state.game.turn+1});
     }
   }
@@ -120,13 +132,18 @@ export class GameController extends React.Component {
  
   //     res.send(html)
   //   })
-    componentWillMount() {
-      setTimeout(() => {
-        let playerTurn = this.state.game.turn % 2;
-        return <Hand player={this.state.game.players[playerTurn]} />
-      }, 5);
-      
+    // componentWillMount() {
+    //   setTimeout(() => {
+    //     let playerTurn = this.state.game.turn % 2;
+    //     return <Hand player={this.state.game.players[playerTurn]} />
+    //   }, 5);  
+    // }
+
+    handleSetNull() {
+      this.state.game.boardLocation = null;
+      this.setState({boardLocation: null});
     }
+
   render(){
     console.log(window.location.href.split('/'))
     if(this.state.loading === true){
@@ -143,9 +160,9 @@ export class GameController extends React.Component {
           <div className="playerSection pageItem"><Hand player={this.state.game.players[0]} selectCard = {this.selectCard} deselectCard={this.handleDeselectCard}/>
           </div>
           <div className="boardContainer">
-            <div className="header pageItem"><Header /></div>
+            <div className="header pageItem"><Header setNull = {this.handleSetNull}/></div>
             <div className="boardComp pageItem"><Board dropCard={this.handleDropCard} boardArray={this.state.game.board} /></div>
-            <div className="footer pageItem"><Footer /></div>
+            <div className="footer pageItem"><Footer setNull = {this.handleSetNull}/></div>
           </div>
           <div className="playerSection pageItem"><Hand player={this.state.game.players[1]} selectCard = {this.selectCard} deselectCard={this.handleDeselectCard}/></div>
         </div>
