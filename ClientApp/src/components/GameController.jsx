@@ -212,7 +212,7 @@ export class GameController extends React.Component {
           </div>
           <div className="boardContainer">
             <div className="header pageItem"><Header setNull = {this.handleSetNull}/></div>
-            <div className="boardComp pageItem"><Board dropCard={this.handleDropCard} boardArray={this.state.game.board} /></div>
+            <div className="boardComp pageItem"><Board dropCard={this.handleDropCard} boardArray={this.state.game.board} deselectCard={this.handleDeselectCard}/></div>
             <div className="footer pageItem"><Footer setNull = {this.handleSetNull}/></div>
           </div>
           <div className="playerSection pageItem"><Hand player={this.state.game.players[1]} turn = {this.state.game.turn + 1} selectCard = {this.selectCard} deselectCard={this.handleDeselectCard}/></div>

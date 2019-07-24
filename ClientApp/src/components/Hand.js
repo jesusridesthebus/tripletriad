@@ -22,7 +22,7 @@ export default function Hand(props) {
       <div className="hand">
         {props.player.map((hand) =>
           <div className="cardHolder">
-            <img onDragStart={() => selectCard(hand.id)} onDragEnd={() => deselectCard()} className={`card ${hand.id}`} draggable='true' src={require(`./../assets/img/${hand.id}_${hand.owner}.png`)} />
+            <img onClick={() => selectCard(hand.id)} onDragStart={() => selectCard(hand.id)} onDragEnd={() => deselectCard()} className={`card ${hand.id}`} draggable='true' src={require(`./../assets/img/${hand.id}_${hand.owner}.png`)} />
           </div>
         )}
       </div>
