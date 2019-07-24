@@ -5,8 +5,8 @@ import Hand from './Hand';
 import Footer from './Footer';
 import { AsyncComponentProvider, createAsyncContext } from 'react-async-component';
 import asyncBootstrapper from 'react-async-bootstrapper';
-import Home from './Home';
 import './GameController.css';
+import SplashPage from './SplashPage'
 
 export class GameController extends React.Component {
 
@@ -38,6 +38,7 @@ export class GameController extends React.Component {
       });
 
     this.state = {
+      splash: true,
       loading: true,
       deck: [],
       game: {
@@ -63,6 +64,12 @@ export class GameController extends React.Component {
     this.handleDeselectCard = this.handleDeselectCard.bind(this);
     this.handleDropCard = this.handleDropCard.bind(this);
     this.handleSetNull = this.handleSetNull.bind(this);
+    this.handleSetSplashFalse = this.handleSetSplashFalse.bind(this);
+  }
+
+  handleSetSplashFalse() {
+    this.state.splash = false;
+    this.setState({splash: false});
   }
 
   shuffle(deck) {
@@ -115,9 +122,14 @@ export class GameController extends React.Component {
       if(isNaN(this.state.game.board[this.state.neighbors[loc][el]]) === true ){
 
         let neighborino = this.state.game.board[this.state.neighbors[loc][el]];
-        console.log(neighborino[dict[el]]);
+        console.log(this.state.neighbors[loc][el]);
         if(this.state.game.board[loc][el] > neighborino[dict[el]]){
-          neighborino.owner = this.state.game.board[loc].owner;
+          if(neighborino.owner !== this.state.game.board[loc].owner){
+            neighborino.owner = this.state.game.board[loc].owner;
+            console.log(document.getElementsByClassName('b'+this.state.neighbors[loc][el])[0].classList)
+            document.getElementsByClassName('b'+this.state.neighbors[loc][el])[0].classList.add("flip");
+            setTimeout(()=>document.getElementsByClassName('b'+this.state.neighbors[loc][el])[0].classList.remove("flip"),700)
+          }
           console.log(this.state);
         }
       }
@@ -195,6 +207,13 @@ export class GameController extends React.Component {
 
   render(){
     console.log(window.location.href.split('/'))
+    if(this.state.splash === true) {
+      return(
+        <div>
+          <SplashPage setSplash={this.handleSetSplashFalse} />
+        </div>
+      ) 
+    }
     if(this.state.loading === true){
       console.log("hey");
       return(

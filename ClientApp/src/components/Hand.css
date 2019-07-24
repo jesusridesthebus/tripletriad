@@ -2,15 +2,16 @@
   display: grid;
   width: inherit;
   height:90vh;
-  grid-template-columns: 200px;
-  grid-template-rows: 200px 200px 200px 200px;
+  grid-template-columns: 216px;
+  grid-template-rows: 222px 222px 222px 222px;
   grid-gap: 0;
+  margin: -12px
 }
 
 .cardHolder {
   display: inline-block;
   width: 216px;
   height: 222px;
-  margin: 20px 0px 20px 0px;
+  /* margin: 20px 0px 20px 0px; */
   padding: 5px;
 }

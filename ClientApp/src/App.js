@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router';
 import { Layout } from './components/Layout';
-import { Home } from './components/Home';
 import { GameController } from './components/GameController';
+import SplashPage from './components/SplashPage';
 
 export default class App extends Component {
   static displayName = App.name;
@@ -10,8 +10,7 @@ export default class App extends Component {
   render () {
     return (
       <Layout>
-        <Route exact path='/' component={GameController} />
-        <Route path='/game' component={GameController} />
+        <Route path='/' component={GameController} />
       </Layout>
     );
   }

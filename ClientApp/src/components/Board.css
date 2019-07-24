@@ -1,3 +1,6 @@
+@import "~/source/animate.css/_base.css";
+@import "~/source/animate.css/flippers/flip.css";
+
 .board {
   display: grid;
   width: 690px;
